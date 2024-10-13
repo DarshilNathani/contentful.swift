@@ -15,8 +15,14 @@ Pod::Spec.new do |spec|
   }
 
   spec.authors      = { "JP Wright" => "jp@contentful.com", "Boris Bügling" => "boris@buegling.com" }
-  spec.source       = { :git => "https://github.com/contentful/contentful.swift.git",
-                        :tag => spec.version.to_s }
+#  spec.source       = { :git => "https://github.com/DarshilNathani/contentful.swift.git",
+#                        :tag => spec.version.to_s }
+
+spec.source = {
+  :git => "https://github.com/DarshilNathani/contentful.swift.git",
+  :branch => "master"
+}
+
   spec.requires_arc = true
 
   spec.swift_version             = '5'
