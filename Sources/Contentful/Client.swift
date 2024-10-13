@@ -147,7 +147,7 @@ open class Client {
         switch endpoint {
         case .spaces:
             components = URLComponents(string: "\(scheme)://\(host)/spaces/\(spaceId)/\(endpoint.pathComponent)")!
-        case .assets, .contentTypes, .locales, .entries, .sync:
+        case .assets, .contentTypes, .locales, .entries, .sync, .tags:
             components = URLComponents(string: "\(scheme)://\(host)/spaces/\(spaceId)/environments/\(environmentId)/\(endpoint.pathComponent)")!
         }
 
@@ -493,5 +493,31 @@ open class Client {
             ContentfulLogger.log(.error, message: error.message)
             return .failure(error)
         }
+    }
+    
+    @discardableResult
+    public func fetchTag(id: String, completion: @escaping ResultsHandler<Tag>) -> URLSessionDataTask {
+        let url = self.url(endpoint: .tags)
+        return fetchDecodable(url: url.appendingPathComponent(id), completion: completion)
+    }
+}
+
+// Define the Tag class/struct
+public class Tag: Resource, Codable {
+    public let sys: Sys
+    public let name: String
+
+    // Initializer
+    required init(sys: Sys, name: String) {
+        self.sys = sys
+        self.name = name
+    }
+
+    static var endpoint: String {
+        return "tag"
+    }
+
+    var id: String {
+        return sys.id
     }
 }

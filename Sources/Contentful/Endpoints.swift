@@ -22,6 +22,8 @@ public enum Endpoint: String {
     case locales
     /// The synchronization endpoint.
     case sync
+    /// The tag endpoint
+    case tags
 
     /// The path component string for the current endpoint.
     public var pathComponent: String {
